@@ -99,17 +99,19 @@ def move():
 
     move, need_turn = premove(dimension, mydir, mypos)
     
+    """
     enemy = []
     for key in data['arena']['state']:
         if(key != myself):
             enemy.append((data['arena']['state'][key]['x'],  data['arena']['state'][key]['y']))
 
     shoot = canshoot(enemy, mypos, mydir)
-
-    if(shoot):
-        return moves[1]
-    elif(need_turn):
-        return move
+    """
+    #if(shoot):
+    #    return moves[1]
+    if(need_turn):
+        mo =  [move, "T"]
+        return mo[random.randrange(2)]
     elif(was_hit):
         return moves[random.randrange(2)]
     else:
