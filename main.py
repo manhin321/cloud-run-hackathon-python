@@ -20,24 +20,20 @@ from flask import Flask, request
 
 
 #### User defined variable
-def premove(dimesnion, direction, location):
+def premove(dimension, direction, location):
     move = "R"
     need_turn = False
-    xx, yy = dimension
+    xx, yy =  dimension
     x, y = location
     if(x == xx-1 or y == yy-1 or x == 0 or y == 0):  # no need move, just turn
-        if(x == 0):
-            if(direction != "E"):
-                need_turn = True
-        if(x == xx-1):
-            if(direction != "W":
-                need_turn = True
-        if(y == 0):
-            if(direction != "S"):
-                need_turn = True
-        if(y == yy-1):
-            if(direction != "N"):
-                need_turn = True
+        if(x == 0 and direction != "E"):
+            need_turn = True
+        elif(x == xx-1 and direction != "W"):
+            need_turn = True
+        elif(y == 0 and direction != "S"):
+            need_turn = True
+        elif(y == yy-1 and direction != "N"):
+            need_turn = True
     else:
         need_turn = True
         move = "F"
