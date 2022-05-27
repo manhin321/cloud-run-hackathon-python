@@ -18,12 +18,17 @@ import logging
 import random
 from flask import Flask, request
 
+
+#### User defined variable
+premove = 15
+turnmove = 2
+####
+
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
-#moves = ['F', 'T', 'T', 'F', 'R', 'R', 'R', 'T']
 
 @app.route("/", methods=['GET'])
 def index():
@@ -33,7 +38,14 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
-    return moves[1]
+    while(premove > 0):
+        premove -= 1
+        return moves[0]
+    elif(turnmove > 0):
+        turnmove -= 1
+        return moves[2]
+    else:
+        return moves[1]
     #return moves[random.randrange(len(moves))]
 
 if __name__ == "__main__":
