@@ -67,6 +67,12 @@ def move():
     mypos = (data['arena']['state'][myself]['x'],  data['arena']['state'][myself]['y'])
 
     move, need_turn = premove(dimension, mydir, mypos)
+    
+    logger.info("dim: (%d %d)"%(dimension[0], dimension[1]))
+    logger.info("mydir: %s, mypos: (%d %d)"%(mydir, mypos[0], mypos[1]))
+    logger.info("move: ", move)
+    logger.info(need_turn)
+
     if(need_turn):
         return move
     else:
