@@ -24,11 +24,6 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
 
-### 
-# User defined variables
-mo = 2
-###
-###
 
 @app.route("/", methods=['GET'])
 def index():
@@ -39,7 +34,8 @@ def move():
     request.get_data()
     logger.info(request.json)
     #return moves[random.randrange(len(moves))]
-    mo = 2 - mo
+    mo = random.randrange(2)
+    mo = 2 * mo
     return moves[mo]
 
 if __name__ == "__main__":
