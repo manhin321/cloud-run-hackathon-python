@@ -61,6 +61,8 @@ def move():
 
     mydir = data['arena']['state'][myself]['direction']
     mypos = (data['arena']['state'][myself]['x'],  data['arena']['state'][myself]['y'])
+    was_hit = data['arena']['state'][myself]['wasHit']
+
 
     move, need_turn = premove(dimension, mydir, mypos)
     
@@ -71,6 +73,8 @@ def move():
 
     if(need_turn):
         return move
+    elif(was_hit):
+        return moves[random.randrange(2)]
     else:
         return moves[1]
     #return moves[random.randrange(len(moves))]
