@@ -109,6 +109,7 @@ def move():
     """
     #if(shoot):
     #    return moves[1]
+    """
     if(need_turn):
         mo =  [move, "T"]
         return mo[random.randrange(2)]
@@ -116,6 +117,8 @@ def move():
         return moves[random.randrange(2)]
     else:
         return moves[1]
+    """
+    return moves[1]
     #return moves[random.randrange(len(moves))]
 
 if __name__ == "__main__":
