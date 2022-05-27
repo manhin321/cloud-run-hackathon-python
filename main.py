@@ -38,6 +38,7 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
+    """
     while(premove > 0):
         premove -= 1
         return moves[0]
@@ -46,7 +47,8 @@ def move():
         return moves[2]
     else:
         return moves[1]
-    #return moves[random.randrange(len(moves))]
+    """
+    return moves[random.randrange(len(moves))]
 
 if __name__ == "__main__":
   app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
