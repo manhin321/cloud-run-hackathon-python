@@ -39,6 +39,27 @@ def premove(dimension, direction, location):
         move = "F"
     return move, need_turn
 
+def canshoot(enemy, location, direction):
+    shoot = False
+    x, y = location
+    for xx, yy in enemy:
+        if(direction == 'W'):
+            if(  0 < (x - xx) < 4):
+                shoot = True
+                break
+        elif(direction == 'E'):
+            if(  0 < (xx - x) < 4):
+                shoot = True
+                break
+        if(direction == 'S'):
+            if(  0 < (yy - y) < 4):
+                shoot = True
+                break
+        elif(direction == 'N'):
+            if(  0 < (y - yy) < 4):
+                shoot = True
+                break
+    return shoot
 ####
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
@@ -66,12 +87,16 @@ def move():
 
     move, need_turn = premove(dimension, mydir, mypos)
     
-    logger.info("dim: (%d %d)"%(dimension[0], dimension[1]))
-    logger.info("mydir: %s, mypos: (%d %d)"%(mydir, mypos[0], mypos[1]))
-    logger.info("move: ", move)
-    logger.info(need_turn)
+    enemy = []
+    for key in data['arena']['state']:
+        if(key != myself):
+            enemy.append((data['arena']['state'][key]['x'],  data['arena']['state'][key]['y']))
 
-    if(need_turn):
+    shoot = canshoot(enemy, mypos, mydir)
+
+    if(shoot):
+        return moves[1]
+    elif(need_turn):
         return move
     elif(was_hit):
         return moves[random.randrange(2)]
