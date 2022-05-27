@@ -44,22 +44,34 @@ def canshoot(enemy, location, direction):
     x, y = location
     for xx, yy in enemy:
         if(direction == 'W'):
-            if(  0 < (x - xx) < 4):
+            if(  0 < (x - xx) < 3):
                 shoot = True
                 break
         elif(direction == 'E'):
-            if(  0 < (xx - x) < 4):
+            if(  0 < (xx - x) < 3):
                 shoot = True
                 break
         if(direction == 'S'):
-            if(  0 < (yy - y) < 4):
+            if(  0 < (yy - y) < 3):
                 shoot = True
                 break
         elif(direction == 'N'):
-            if(  0 < (y - yy) < 4):
+            if(  0 < (y - yy) < 3):
                 shoot = True
                 break
     return shoot
+"""
+def possible_turn(dimension, location, direction):
+    x, y = location
+    xx, yy = dimension
+    if(x == 0):
+        if(y==0):
+            return ['R'] if direction == 'E' else ['L']
+        elif(y== yy-1):
+            return ['R'] if direction == 'N' else ['L']
+        else:
+            if(direction == ""
+"""
 ####
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
