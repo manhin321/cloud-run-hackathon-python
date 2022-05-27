@@ -20,8 +20,29 @@ from flask import Flask, request
 
 
 #### User defined variable
-premove = 15
-turnmove = 2
+def premove(dimesnion, direction, location):
+    move = "R"
+    need_turn = False
+    xx, yy = dimension
+    x, y = location
+    if(x == xx-1 or y == yy-1 or x == 0 or y == 0):  # no need move, just turn
+        if(x == 0):
+            if(direction != "E"):
+                need_turn = True
+        if(x == xx-1):
+            if(direction != "W":
+                need_turn = True
+        if(y == 0):
+            if(direction != "S"):
+                need_turn = True
+        if(y == yy-1):
+            if(direction != "N"):
+                need_turn = True
+    else:
+        need_turn = True
+        move = "F"
+    return move, need_turn
+
 ####
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
@@ -38,17 +59,18 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
-    """
-    while(premove > 0):
-        premove -= 1
-        return moves[0]
-    elif(turnmove > 0):
-        turnmove -= 1
-        return moves[2]
+    data = request.json
+    myself = "https://cloud-run-hackathon-python-7qbsdooeja-uc.a.run.app"
+    dimension = data['arena']['dims']
+
+    mydir = data['arena']['state'][myself]['direction']
+    mypos = (data['arena']['state'][myself]['x'],  data['arena']['state'][myself]['y'])
+
+    move, need_turn = premove(dimension, mydir, mypos)
+    if(need_turn):
+        return move
     else:
         return moves[1]
-    """
-    return moves[1]
     #return moves[random.randrange(len(moves))]
 
 if __name__ == "__main__":
